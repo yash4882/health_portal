@@ -1,1 +1,11 @@
-<h1>Home page</h1>
+<h1>Dashboard</h1>
+<% if user_signed_in? %>
+  <% if current_user.receptionist? %>
+    <%= link_to 'Manage Patients', patients_path %>
+  <% elsif current_user.doctor? %>
+    <%= link_to 'View Patient', patients_path %>
+    <%= link_to 'View Patient Statistics', graph_patients_path %>
+  <% end %>
+<% else %>
+  <%= link_to 'Login', new_session_path %>
+<% end %>

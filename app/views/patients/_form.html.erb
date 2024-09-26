@@ -1,0 +1,30 @@
+<%= form_with model: patient do |form| %>
+    <div>
+        <%= form.label :name %><br>
+        <%= form.text_field :name %>
+    </div>
+
+    <div>
+        <%= form.label :age %><br>
+        <%= form.number_field :age %><br>
+    </div>
+
+    <div>
+        <%= form.label :gender %><br>
+        <%= form.select :gender, [['Male'], ['Female']], { include_blank: 'Select Gender' } %>
+    </div>
+
+    <div>
+        <%= form.label :contact %><br>
+        <%= form.text_field :contact %><br>
+    </div>
+
+    <div>
+        <%= form.label :health_issue %><br>
+        <%= form.text_area :health_issue %><br>
+    </div>
+
+    <div>
+        <%= form.submit %>
+    </div>
+<% end %>

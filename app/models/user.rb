@@ -1,6 +1,10 @@
 class User < ApplicationRecord
 	has_secure_password
 
+	has_many :patients
+
+	enum role: [:receptionist, :doctor]
+	
 	validates :email, presence: true, uniqueness: true
 
 	normalizes :email, with: ->(email) {email.strip.downcase}

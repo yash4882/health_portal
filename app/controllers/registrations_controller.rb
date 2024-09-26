@@ -4,6 +4,7 @@ class RegistrationsController < ApplicationController
 	end
 
 	def create
+		params[:user][:role] = params[:user][:role].to_i
 		@user = User.new(registration_params)
 		if @user.save
 			login @user   #login method for logged the user in
@@ -16,6 +17,6 @@ class RegistrationsController < ApplicationController
 	private
 
 	def registration_params
-		params.require(:user).permit(:email, :password, :password_confirmation)
+		params.require(:user).permit(:email, :password, :password_confirmation, :role)
 	end
 end

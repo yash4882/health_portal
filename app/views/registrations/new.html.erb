@@ -22,6 +22,12 @@
 	</div>
 
 	<div>
+	    <%= form.label :role %>
+    	<%= form.select :role, [['Receptionist', 0], ['Doctor', 1]], { include_blank: 'Select Role' } %>
+  	</div>
+
+
+	<div>
 		<%= form.submit "Sign up" %>
 	</div>
 <% end %>

@@ -1,0 +1,27 @@
+<h1>Patients</h1>
+
+<ul>
+  <% @patients.each do |patient| %>
+    <li>
+      <%= patient.name%>
+      <%= patient.age%>
+      <%= patient.gender%>
+      <%= patient.contact%>
+      <%= patient.health_issue%>
+      <%= link_to "Edit", edit_patient_path(patient) %>
+      <%= link_to "Delete", patient_path(patient), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Back", root_path %>
+
+
+<% if user_signed_in? %>
+    <% if current_user.receptionist? %>
+        <%= link_to "New Patient", new_patient_path %>
+    <% end %>
+<% end %>
