@@ -62,3 +62,5 @@ end
 gem 'chartkick'
 
 gem 'groupdate'
+
+gem "tailwindcss-rails", "~> 2.7"

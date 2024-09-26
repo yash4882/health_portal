@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= content_for(:title) || "Health Portal" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <head>
+        <title><%= content_for(:title) || "Health Portal" %></title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
 
-    <%= yield :head %>
+        <%= yield :head %>
 
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
-    
-    <%= javascript_importmap_tags %>
-  </head>
+        <link rel="manifest" href="/manifest.json">
+        <link rel="icon" href="/icon.png" type="image/png">
+        <link rel="icon" href="/icon.svg" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="/icon.png">
+        <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+        <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+        <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
+        
+        <%= javascript_importmap_tags %>
+    </head>
 
-  <body>
-    <div><%= notice %></div>
-    <div><%= alert %></div>
+    <body>
+        <% if notice.present? %>
+          <div class="fixed top-5 left-5 bg-green-500 text-white text-sm px-6 py-3 rounded shadow flex items-center">
+            <span><%= notice %></span>
+            <button onclick="this.parentElement.style.display='none'" class="ml-4 text-white hover:text-gray-200">&times;</button>
+          </div>
+        <% end %>
 
-    <% if user_signed_in? %>
-      <%= link_to "Edit Password", edit_password_path %>
-      <%= link_to "Log out", session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-    <% else %>
-      <%= link_to "Sign up", new_registration_path %>
-      <%= link_to "Log in", new_session_path %>
-    <% end %>
-    <%= yield %>
-  </body>
+        <% if alert.present? %>
+          <div class="fixed top-5 left-5 bg-red-500 text-white text-sm px-6 py-3 rounded shadow flex items-center">
+            <span><%= alert %></span>
+            <button onclick="this.parentElement.style.display='none'" class="ml-4 text-white hover:text-gray-200">&times;</button>
+          </div>
+        <% end %>
+
+
+
+        <% if controller_name != 'registrations' && controller_name != 'sessions'  %>
+            <%= render "layouts/header" %>
+        <% end %>
+        <%= yield %>
+    </body>
 </html>

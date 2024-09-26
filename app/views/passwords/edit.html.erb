@@ -1,28 +1,42 @@
-<h1>Change Password</h1>
+<div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+	<div class="sm:mx-auto sm:w-full sm:max-w-md">
+		<h2 class="mt-14 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Change Your Password</h2>
+  	</div>
+  	<div class="mt-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
+  		<div class="bg-white px-6 py-12 shadow-xl sm:rounded-lg sm:px-12">
+  			<%= form_with model: current_user, url: password_path, class:"space-y-6" do |f| %>
+		  	<% if f.object.errors.any? %>
+		  		<% f.object.errors.full_messages.each do |message| %>
+		  			<div><%= message %></div>
+				<% end %>
+			<% end %>
 
-<%= form_with model: current_user, url: password_path do |form| %>
-	<% if form.object.errors.any? %>
-		<% form.object.errors.full_messages.each do |message| %>
-			<div><%= message %></div>
-		<% end %>
-	<% end %>
 
-	<div>
-		<%= form.label :password_challenge %>
-		<%= form.password_field :password_challenge %>
-	</div>
+  			<div class="py-3">
+  				<%= f.label :password_challenge, class:"block text-sm font-medium leading-6 text-gray-900" %>
+  				<div class="mt-2">
+  					<%= f.password_field :password_challenge, autocomplete: "new-password", class:"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" %>
+          		</div>
+          	</div>
 
-	<div>
-		<%= form.label :password %>
-		<%= form.password_field :password %>
-	</div>
+  			<div class="py-3">
+  				<%= f.label :password, class:"block text-sm font-medium leading-6 text-gray-900" %>
+  				<div class="mt-2">
+  					<%= f.password_field :password, autocomplete: "new-password", class:"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" %>
+          		</div>
+          	</div>
 
-	<div>
-		<%= form.label :password_confirmation %>
-		<%= form.password_field :password_confirmation %>
-	</div>
+  			<div class="py-3">
+  				<%= f.label :password_confirmation, class:"block text-sm font-medium leading-6 text-gray-900" %>
+  				<div class="mt-2">
+  					<%= f.password_field :password_confirmation, autocomplete: "new-password", class:"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" %>
+          		</div>
+          	</div>
 
-	<div>
-		<%= form.submit "Sign up" %>
-	</div>
-<% end %>
+	        <div>
+	          <%= f.submit "Submit", class:"flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"%>
+	        </div>
+      	</div>
+      	<% end %>
+    </div>
+</div>
