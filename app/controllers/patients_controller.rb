@@ -4,7 +4,7 @@ class PatientsController < ApplicationController
 	before_action :require_receptionist, only: [:new, :create, :edit, :update, :destroy]
 
 	def index
-		@patients = Patient.page(params[:page]).per(9)
+		@patients = Patient.all
 		@patients_today = Patient.where(created_at: Date.today.all_day).page(params[:page]).per(6)
 		@graph_data_day = Patient.group_by_day(:created_at).count
 		@graph_data_minute = Patient.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
@@ -46,6 +46,7 @@ class PatientsController < ApplicationController
 
 	def patient
 		@patients = Patient.page(params[:page]).per(9)
+		# @patients = Patient.all
 	end
 
 	private
