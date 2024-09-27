@@ -13,18 +13,6 @@ export default class extends Controller {
   }
 }
 
-// function openDropdown(element) {
-//     enter(element).then(() => {
-//         console.log("Enter transition complete")
-//     })
-// }
- 
-// function closeDropdown() {
-//     leave(this.dropdownTarget).then(() => {
-//         element.destroy();
-//     })
-// }
- 
 function toggleDropdown(element) {
     toggle(element);
 }

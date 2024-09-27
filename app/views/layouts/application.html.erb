@@ -22,20 +22,18 @@
 
     <body>
         <% if notice.present? %>
-          <div class="fixed top-5 left-5 bg-green-500 text-white text-sm px-6 py-3 rounded shadow flex items-center">
+          <div data-controller="hide-notification" class="fixed top-5 left-5 bg-green-500 text-white text-sm px-6 py-3 rounded shadow flex items-center">
             <span><%= notice %></span>
             <button onclick="this.parentElement.style.display='none'" class="ml-4 text-white hover:text-gray-200">&times;</button>
           </div>
         <% end %>
 
         <% if alert.present? %>
-          <div class="fixed top-5 left-5 bg-red-500 text-white text-sm px-6 py-3 rounded shadow flex items-center">
+          <div data-controller="hide-notification" class="fixed top-5 left-5 bg-red-500 text-white text-sm px-6 py-3 rounded shadow flex items-center">
             <span><%= alert %></span>
             <button onclick="this.parentElement.style.display='none'" class="ml-4 text-white hover:text-gray-200">&times;</button>
           </div>
         <% end %>
-
-
 
         <% if controller_name != 'registrations' && controller_name != 'sessions'  %>
             <%= render "layouts/header" %>
