@@ -22,9 +22,12 @@
     		</div>
     	</div>
     	<% end %>
-    	 <div class="flex justify-between items-center p-6 border-t border-gray-200">
-	      <%= link_to "Back", root_path, class: "text-blue-500" %>
     </div>
+    <div class="flex justify-between items-center p-6 border-t border-gray-200">
+        <%= link_to "Back", root_path, class: "text-blue-900" %>
+        <div class="pagination hover:text-blue-900">
+          <%= paginate @patients %>
+        </div>
     </div>
 </div>
 

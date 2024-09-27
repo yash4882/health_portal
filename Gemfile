@@ -64,3 +64,5 @@ gem 'chartkick'
 gem 'groupdate'
 
 gem "tailwindcss-rails", "~> 2.7"
+
+gem 'kaminari'
