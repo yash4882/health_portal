@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
 	enum role: [:receptionist, :doctor]
 	
+	validates :name, presence: true
 	validates :email, presence: true, uniqueness: true
 
 	normalizes :email, with: ->(email) {email.strip.downcase}
