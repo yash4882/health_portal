@@ -1,27 +1,99 @@
-<h1>Patients</h1>
-
-<ul>
-  <% @patients.each do |patient| %>
-    <li>
-      <%= patient.name%>
-      <%= patient.age%>
-      <%= patient.gender%>
-      <%= patient.contact%>
-      <%= patient.health_issue%>
-      <%= link_to "Edit", edit_patient_path(patient) %>
-      <%= link_to "Delete", patient_path(patient), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %>
-    </li>
-  <% end %>
-</ul>
-
-<%= link_to "Back", root_path %>
-
-
-<% if user_signed_in? %>
-    <% if current_user.receptionist? %>
-        <%= link_to "New Patient", new_patient_path %>
-    <% end %>
-<% end %>
+<div class="min-h-screen bg-gray-100 p-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <!-- Doctor data -->
+        <div class="bg-white rounded-lg shadow p-6 flex justify-between">
+            <div>
+                <h1 class="text-3xl font-semibold text-gray-900 p-4">Good Morning, <%= current_user.email %></h1>
+                <p class="text-gray-600 p-4">I hope you're in a good mood because there are <%= @patients.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count %> patients waiting for you today.</p>
+                <div class="flex justify-left p-4 border-gray-200">
+                    <% if user_signed_in? && current_user.receptionist? %>
+                        <%= link_to "Registere Patient", new_patient_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg" %>
+                    <% else %>
+                        <%= link_to 'Registered Patients', patient_patients_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg" %>
+                    <% end %> 
+                </div>
+            </div>
+        </div>
+        <!-- Todays Patients card -->
+        <div class="bg-white rounded-lg shadow p-6 flex justify-between items-center">
+            <div>
+                <h2 class="text-gray-600 font-medium">Today's Patients</h2>
+                <h3 class="text-2xl font-semibold text-gray-900"><%= @patients.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).count %></h3>
+                <p class="text-gray-500 text-sm">Available patients for today</p>
+            </div>
+            <div>
+                <!-- Placeholder for chart -->
+                <span class="text-2xl"><%= area_chart @graph_data_minute %></span>
+            </div>
+        </div>
+        <!-- Total patients card -->
+        <div class="bg-white rounded-lg shadow p-6 flex justify-between items-center">
+            <div>
+                <h2 class="text-gray-600 font-medium">Total Patients</h2>
+                <h3 class="text-2xl font-semibold text-gray-900"><%= @patients.count %></h3>
+                <p class="text-gray-500 text-sm">Available total patients</p>
+            </div>
+            <div>
+                <!-- Placeholder for chart -->
+                <span class="text-2xl"><%= area_chart @graph_data_day %></span>
+            </div>
+        </div>
+    </div>
+    <!-- Patient List Section -->
+    <div class="bg-white rounded-lg shadow mb-6">
+        <div class="flex justify-between items-center p-6 border-b border-gray-200">
+            <% if user_signed_in? && current_user.doctor? %>
+                <h2 class="text-lg font-semibold text-gray-900">Today's Patient</h2>
+            <% else %>
+                <h2 class="text-lg font-semibold text-gray-900">Registered Patients</h2>
+            <% end %>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+            <% if user_signed_in? && current_user.doctor? %>
+                <% @patients_today.each do |patient| %>
+                <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow duration-200">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div>
+                            <h3 class="text-gray-900 font-medium text-lg"><%= patient.name %></h3>
+                            <p class="text-gray-500 text-sm"><%= patient.gender %>, <%= patient.age %> Years</p>
+                        </div>
+                    </div>
+                    <div class="text-gray-600 text-sm space-y-2">
+                        <p><strong>Contact:</strong> <%= patient.contact %></p>
+                        <p><strong>Health Issue:</strong> <%= patient.health_issue %></p>
+                        <div class="flex space-x-4 mt-4">
+                            <%= link_to 'Detail', patient_path(patient), class: 'text-blue-500 hover:underline' %>
+                            <% if user_signed_in? && current_user.receptionist? %>
+                                <%= link_to 'Edit', edit_patient_path(patient), class: 'text-blue-500 hover:underline' %>
+                                <%= link_to 'Delete', patient_path(patient), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'text-red-500 hover:underline' %>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+                <% end %>
+            <% else %>
+                <% @patients.each do |patient| %>
+                <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow duration-200">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div>
+                            <h3 class="text-gray-900 font-medium text-lg"><%= patient.name %></h3>
+                            <p class="text-gray-500 text-sm"><%= patient.gender %>, <%= patient.age %> Years</p>
+                        </div>
+                    </div>
+                    <div class="text-gray-600 text-sm space-y-2">
+                        <p><strong>Contact:</strong> <%= patient.contact %></p>
+                        <p><strong>Health Issue:</strong> <%= patient.health_issue %></p>
+                        <div class="flex space-x-4 mt-4">
+                            <%= link_to 'Detail', patient_path(patient), class: 'text-blue-500 hover:underline' %>
+                            <% if user_signed_in? && current_user.receptionist? %>
+                                <%= link_to 'Edit', edit_patient_path(patient), class: 'text-blue-500 hover:underline' %>
+                                <%= link_to 'Delete', patient_path(patient), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'text-red-500 hover:underline' %>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>

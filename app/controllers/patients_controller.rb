@@ -1,10 +1,18 @@
 class PatientsController < ApplicationController
 	before_action :authenticate_user!
-	before_action :set_id, only: [:edit, :update, :destroy]
+	before_action :set_id, only: [:show, :edit, :update, :destroy]
 	before_action :require_receptionist, only: [:new, :create, :edit, :update, :destroy]
 
 	def index
 		@patients = Patient.all
+		@patients_today = Patient.where(created_at: Date.today.all_day)
+		@graph_data_day = Patient.group_by_day(:created_at).count
+		@graph_data_minute = Patient.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+                            .group_by_minute(:created_at)
+                            .count
+	end
+
+	def show
 	end
 
 	def new
@@ -36,12 +44,9 @@ class PatientsController < ApplicationController
 		redirect_to patients_path, notice: 'Patient deleted successfully.'
 	end
 
-	def graph
-		@patients = Patient.all 
-		@graph_data = Patient.group_by_day(:created_at).count
-		# @graph_data = Patient.group_by_minute(:created_at).count
+	def patient
+		@patients = Patient.all
 	end
-
 
 	private
 

@@ -71,6 +71,7 @@
             tabindex="-1">
             <!-- Active: "bg-gray-100", Not Active: "" -->
             <% if user_signed_in? %>
+              <%= link_to "Home", root_path, class:"block px-4 py-2 text-sm text-gray-700", role:"menuitem", tabindex:"-1" %>
               <%= link_to "Edit Password", edit_password_path, class:"block px-4 py-2 text-sm text-gray-700", role:"menuitem", tabindex:"-1" %>
               <%= link_to "Log out", session_path, data: { turbo_method: :delete }, class:"block px-4 py-2 text-sm text-gray-700", role:"menuitem", tabindex:"-1"%>
             <% else %>
