@@ -20,7 +20,7 @@
                 </svg>
               <% end %>
             </div>
-            <%= text_field_tag :search, params[:search], id: "search", class: "block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 hover:ring-blue-500 focus:ring-2 focus:ring-inset focus:ring-blue-600 transition duration-200 sm:text-base sm:leading-6", placeholder: "Search", type: "search" %>
+            <%= text_field_tag :search, params[:search], id: "search", class: "block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 hover:ring-blue-500 focus:ring-2 focus:ring-inset focus:ring-blue-500 transition duration-200 sm:text-base sm:leading-6", placeholder: "Search", type: "search" %>
           </div>
         </div>
       <% end %>
@@ -37,15 +37,15 @@
       <!-- Profile dropdown -->
       <div class="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center">
         <div class="relative ml-4 flex-shrink-0">
+          <%= link_to "Home", root_path, class:"block px-4 py-2 text-lg text-blue-500 hover:text-blue-600", role:"menuitem", tabindex:"-1" %>
+        </div>
+        <div class="relative ml-4 flex-shrink-0">
           <div>
-            <button data-header-target="OpenUserMenu" type="button" class="relative flex rounded-full bg-white focus:outline-none focus:ring-1 hover:ring-blue-500 focus:ring-offset-1" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-              <span class="absolute -inset-1.5"></span>
-              <span class="sr-only">Open user menu</span>
+            <button data-header-target="OpenUserMenu" type="button" class="relative flex rounded-full bg-white focus:outline-none focus:ring-1 hover:ring-blue-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
               <img class="h-10 w-10 rounded-full" src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg" alt="">
 
             </button>
           </div>
-
           <div 
             data-header-target="dropdown" 
             data-transition-enter="transition ease-out duration-100"
@@ -61,7 +61,6 @@
             tabindex="-1">
             <!-- Active: "bg-gray-100", Not Active: "" -->
             <% if user_signed_in? %>
-              <%= link_to "Home", root_path, class:"block px-4 py-2 text-sm text-blue-500 hover:text-blue-600", role:"menuitem", tabindex:"-1" %>
               <%= link_to "Edit Password", edit_password_path, class:"block px-4 py-2 text-sm text-blue-500 hover:text-blue-600", role:"menuitem", tabindex:"-1" %>
               <%= link_to "Log out", session_path, data: { turbo_method: :delete }, class:"block px-4 py-2 text-sm text-red-500 hover:text-red-600", role:"menuitem", tabindex:"-1"%>
             <% else %>

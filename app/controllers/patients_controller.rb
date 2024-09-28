@@ -4,13 +4,13 @@ class PatientsController < ApplicationController
 	before_action :require_receptionist, only: [:new, :create, :edit, :update, :destroy]
 
 	def index
-		@patients = Patient.page(params[:page]).per(9)
+		@patients = Patient.page(params[:page]).per(6)
 		@patients_today_count = Patient.where(created_at: Date.today.all_day).count
 		@patients_all_count = Patient.all.count
 		@patients_today = Patient.where(created_at: Date.today.all_day).page(params[:page]).per(6)
 		# for showing chart data
 		@graph_data_day = Patient.group_by_day(:created_at).count
-        @graph_data_minute = Patient.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).group_by_minute(:created_at).count
+        @graph_data_minute = Patient.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).group_by_hour(:created_at).count
 		if params[:search].present?
     		@patients = @patients.where('LOWER(name) LIKE ?', "%#{params[:search].downcase}%")
     		@patients_today = @patients.where('LOWER(name) LIKE ?', "%#{params[:search].downcase}%")
@@ -53,7 +53,7 @@ class PatientsController < ApplicationController
 	end
 
 	def patient
-		@patients = Patient.page(params[:page]).per(9)
+		@patients = Patient.page(params[:page]).per(12)
 	end
 
 	private
