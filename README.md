@@ -3,22 +3,25 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
+Health Portal : Ruby on Rails, Tailwind CSS, Stimulus JS and Some Ruby Gems.
+
 Things you may want to cover:
 
-* Ruby version
+* Ruby 3.1.0, Rails 7.2.1
 
-* System dependencies
+* System dependencies : bundle install
 
-* Configuration
+* Database creation : rails db:create or rails db:migrate
 
-* Database creation
+* Database Configuration :	default: &default
+							  adapter: postgresql
+							  port: 5432
+							  username: username
+							  password: password
+							  host: localhost
 
-* Database initialization
+* For dummy data Run : rails db:seed
 
-* How to run the test suite
+* For CSS & JS loading Run : rails assets:precompile
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* rails server
