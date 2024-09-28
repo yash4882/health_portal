@@ -1,10 +1,47 @@
-<h1><%= @patient.name %></h1>
+<div class="flex justify-center mt-10 ">
+  <div class="w-full max-w-lg bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="p-6">
+      <h1 class="text-xl font-bold text-gray-800 mt-12 text-center">Patient Information</h1>
+      <table class="min-w-full table-auto mt-12">
+        <tbody class="divide-y divide-gray-300">
+          <tr>
+            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Patient Name</th>
+            <td class="px-4 py-2 text-sm text-gray-800"><%= @patient.name %></td>
+          </tr>
+          <tr>
+            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Age</th>
+            <td class="px-4 py-2 text-sm text-gray-800"><%= @patient.age %></td>
+          </tr>
+          <tr>
+            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Gender</th>
+            <td class="px-4 py-2 text-sm text-gray-800"><%= @patient.gender %></td>
+          </tr>
+          <tr>
+            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Contact</th>
+            <td class="px-4 py-2 text-sm text-gray-800"><%= @patient.contact %></td>
+          </tr>
+          <tr>
+            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Health Issue</th>
+            <td class="px-4 py-2 text-sm text-gray-800"><%= @patient.health_issue %></td>
+          </tr>
+          <tr>
+            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Blood_type</th>
+            <td class="px-4 py-2 text-sm text-gray-800"><%= @patient.blood_type %></td>
+          </tr>
+          <tr>
+            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Height</th>
+            <td class="px-4 py-2 text-sm text-gray-800"><%= @patient.height %> cm</td>
+          </tr>
+          <tr>
+            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600">Weight</th>
+            <td class="px-4 py-2 text-sm text-gray-800"><%= @patient.weight %> kg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-<p><%= @patient.age %></p>
-<p><%= @patient.gender %></p>
-<p><%= @patient.contact %></p>
-<p><%= @patient.health_issue %></p>
-
-<ul>
-  <li><%= link_to "Back", root_path %></li>
-</ul>
+    <div class="px-6 py-4 text-center">
+      <%= link_to "Back", root_path, class: "text-indigo-600 hover:text-indigo-900 font-medium" %>
+    </div>
+  </div>
+</div>
