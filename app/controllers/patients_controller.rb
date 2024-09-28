@@ -11,6 +11,13 @@ class PatientsController < ApplicationController
 		# for showing chart data
 		@graph_data_day = Patient.group_by_day(:created_at).count
         @graph_data_minute = Patient.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).group_by_minute(:created_at).count
+		if params[:search].present?
+    		@patients = @patients.where('LOWER(name) LIKE ?', "%#{params[:search].downcase}%")
+    		@patients_today = @patients.where('LOWER(name) LIKE ?', "%#{params[:search].downcase}%")
+      	end
+    	if @patients.empty?
+      		flash.now[:alert] = "No users found."
+  		end
     end
 
 	def show
