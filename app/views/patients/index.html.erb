@@ -69,12 +69,17 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= patient.age %></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= patient.contact %></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= patient.health_issue %></td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-500">
-                                <%= link_to 'Detail', patient_path(patient), class: 'text-blue-500 hover:underline' %>
-                                <% if user_signed_in? && current_user.receptionist? %>
-                                    <%= link_to 'Edit', edit_patient_path(patient), class: 'text-blue-500 hover:underline' %>
-                                    <%= link_to 'Delete', patient_path(patient), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'text-red-500 hover:underline' %>
-                                <% end %>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-500" data-controller="dropdown">
+                                <button data-action="click->dropdown#toggle" class="text-blue-900 hover:text-blue-600">
+                                    ☰
+                                </button>
+                                <div data-dropdown-target="menu" class="hidden absolute bg-white shadow-lg rounded-lg mt-2 py-2">
+                                    <%= link_to 'Details', patient_path(patient), class: 'block px-4 py-2 text-blue-500 hover:bg-gray-100' %>
+                                    <% if user_signed_in? && current_user.receptionist? %>
+                                        <%= link_to 'Edit', edit_patient_path(patient), class: 'block px-4 py-2 text-blue-500 hover:bg-gray-100' %>
+                                        <%= link_to 'Delete', patient_path(patient), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'block px-4 py-2 text-red-500 hover:bg-gray-100' %>
+                                        <% end %>
+                                </div>
                             </td>
                         </tr>
                         <% end %>
@@ -87,12 +92,17 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= patient.age %></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= patient.contact %></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= patient.health_issue %></td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-500">
-                                <%= link_to 'Detail', patient_path(patient), class: 'text-blue-500 hover:underline' %>
-                                <% if user_signed_in? && current_user.receptionist? %>
-                                    <%= link_to 'Edit', edit_patient_path(patient), class: 'text-blue-500 hover:underline' %>
-                                    <%= link_to 'Delete', patient_path(patient), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'text-red-500 hover:underline' %>
-                                <% end %>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-500" data-controller="dropdown">
+                                <button data-action="click->dropdown#toggle" class="text-blue-900 hover:text-blue-600">
+                                    ☰
+                                </button>
+                                <div data-dropdown-target="menu" class="hidden absolute bg-white shadow-lg rounded-lg mt-2 py-2">
+                                    <%= link_to 'Details', patient_path(patient), class: 'block px-4 py-2 text-blue-500 hover:bg-gray-100' %>
+                                    <% if user_signed_in? && current_user.receptionist? %>
+                                        <%= link_to 'Edit', edit_patient_path(patient), class: 'block px-4 py-2 text-blue-500 hover:bg-gray-100' %>
+                                        <%= link_to 'Delete', patient_path(patient), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'block px-4 py-2 text-red-500 hover:bg-gray-100' %>
+                                        <% end %>
+                                </div>
                             </td>
                         </tr>
                         <% end %>
